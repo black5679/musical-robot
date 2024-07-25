@@ -1,0 +1,19 @@
+<div *ngIf="error" class="error">{{ error }}</div>
+<form [formGroup]="articleForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="title">Title</label>
+    <input id="title" formControlName="title" />
+    <div *ngIf="articleForm.get('title')?.invalid && (articleForm.get('title')?.touched || articleForm.get('title')?.dirty)">
+      <small *ngIf="articleForm.get('title')?.errors?.['required']">Title is required.</small>
+    </div>
+  </div>
+  <div>
+    <label for="content">Content</label>
+    <textarea id="content" formControlName="content"></textarea>
+    <div *ngIf="articleForm.get('content')?.invalid && (articleForm.get('content')?.touched || articleForm.get('content')?.dirty)">
+      <small *ngIf="articleForm.get('content')?.errors?.['required']">Content is required.</small>
+    </div>
+  </div>
+  <button type="submit" [disabled]="articleForm.invalid">Submit</button>
+</form>
+<a routerLink="/articles">Back to Articles</a>
